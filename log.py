@@ -13,6 +13,7 @@ def create_log_df(filename):
     with open(filename, 'r') as file:
         while True:
             line: str = file.readline()
+            #print(line)
             if not line:
                 break
             operation = parse_logline(line)
@@ -68,9 +69,11 @@ def parse_logline(line):
 
 
 
-#df_logfile = create_log_df('/home/gurleenkaur/Programming/log_analysis/data/logs.log')
-#print(df_logfile)
+df_logfile = create_log_df('/home/gurleenkaur/Programming/log_analysis/data/logs.log')
+print(df_logfile)
 
-df_operation_name = get_operation_type('query')
-print(df_operation_name)
+
+
+#df_operation_name = get_operation_type('1')
+#print(df_operation_name)
 
