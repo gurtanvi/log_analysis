@@ -74,6 +74,32 @@ print(df_logfile)
 
 
 
-#df_operation_name = get_operation_type('1')
-#print(df_operation_name)
+print(df_logfile['name'].nunique())
+# how many queries, mutations and subscriptions have been performed
+print(df_logfile.type.value_counts().query)
+print(df_logfile.type.value_counts().mutation)
+print(df_logfile.type.value_counts().subscription)
 
+#counts for different operations
+print(df_logfile['name'].value_counts())
+
+#average duration type grouped by operation type
+group_operationtype1 = df_logfile.groupby("type")
+mean_operationtype = group_operationtype1.mean()	
+mean_operationtype = mean_operationtype.reset_index()
+print(mean_operationtype) 	
+
+
+#average duration type grouped by operation
+group_operationname = df_logfile.groupby("name")
+mean_operationname = group_operationname.mean()
+mean_operationname = mean_operationname.reset_index()
+print(mean_operationname)
+
+#max and min duration grouped by operation
+operationname_mean = df_logfile.groupby('name').agg({'duration': ['max','min']})
+print(operationname_mean)
+
+#max and min operation grouped by operation type
+operationtype_mean = df_logfile.groupby('type').agg({'duration': ['max','min']})
+print(operationtype_mean)
