@@ -73,33 +73,33 @@ df_logfile = create_log_df('/home/gurleenkaur/Programming/log_analysis/data/logs
 print(df_logfile)
 
 
-
+log_file_value_counts = df_logfile.type.value_counts()
 print(df_logfile['name'].nunique())
 # how many queries, mutations and subscriptions have been performed
-print(df_logfile.type.value_counts().query)
-print(df_logfile.type.value_counts().mutation)
-print(df_logfile.type.value_counts().subscription)
+print("query count:", log_file_value_counts.query)
+print("mutation count:", log_file_value_counts.mutation)
+print("subscription count:", log_file_value_counts.subscription)
 
 #counts for different operations
-print(df_logfile['name'].value_counts())
+print("operation count:", df_logfile['name'].value_counts())
 
 #average duration type grouped by operation type
-group_operationtype1 = df_logfile.groupby("type")
-mean_operationtype = group_operationtype1.mean()	
-mean_operationtype = mean_operationtype.reset_index()
-print(mean_operationtype) 	
+group_operation_type = df_logfile.groupby("type")
+mean_operation_type = group_operation_type.mean()	
+mean_operation_type = mean_operation_type.reset_index()
+print(mean_operation_type) 	
 
 
 #average duration type grouped by operation
-group_operationname = df_logfile.groupby("name")
-mean_operationname = group_operationname.mean()
-mean_operationname = mean_operationname.reset_index()
-print(mean_operationname)
+group_operation_name = df_logfile.groupby("name")
+mean_operation_name = group_operation_name.mean()
+mean_operation_name = mean_operation_name.reset_index()
+print(mean_operation_name)
 
 #max and min duration grouped by operation
-operationname_mean = df_logfile.groupby('name').agg({'duration': ['max','min']})
-print(operationname_mean)
+operation_max_min = df_logfile.groupby('name').agg({'duration': ['max','min']})
+print(operation_max_min)
 
 #max and min operation grouped by operation type
-operationtype_mean = df_logfile.groupby('type').agg({'duration': ['max','min']})
-print(operationtype_mean)
+operation_type_max_min = df_logfile.groupby('type').agg({'duration': ['max','min']})
+print(operation_type_max_min)
